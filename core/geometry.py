@@ -1,15 +1,4 @@
 
-# Simple point class for storing a coordinates as a tuple object
-class Point(object):
-	def __init__(self, x, y):
-		self.x = x
-		self.y = y
-	
-	# Returns a copy of itself to protect own content
-	def get_position(self):
-		return Point(self.x, self.y)
-		
-		
 # Simple vector class
 class Vector(object):
 
@@ -36,3 +25,21 @@ class Vector(object):
 	def duplicate(self):
 		return Vector(self.x, self.y, self.mag)
 		
+
+# Simple point class for storing a coordinates as a tuple object
+class Point(object):
+	def __init__(self, x, y):
+		self.x = x
+		self.y = y
+	
+	# Returns a copy of itself to protect own content
+	def get_position(self):
+		return Point(self.x, self.y)
+		
+class MassPoint(Point):
+	
+	def __init__(self, x, y, m=1):
+		super().__init__(x, y)
+		self.m = m
+		
+	
