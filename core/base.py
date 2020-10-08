@@ -108,5 +108,18 @@ class Universe(object):
 						crnt = None
 				# advance to next object in LL
 				else
-					crnt = crnt.next			
+					crnt = crnt.next
+					
+	def draw(self, win):
+		crnt = head
+		while crnt != None:
+			crnt.obj.draw(win)
+			crnt = crnt.next
 			
+	def update(self):
+		crnt = head
+		while crnt != None:
+			crnt.obj.update()
+			crnt = crnt.next
+		
+		
