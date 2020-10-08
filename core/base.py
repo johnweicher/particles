@@ -39,4 +39,40 @@ class Universe(object):
 		
 	def delete(self, obj):
 	
+		# LL is empty, invalid delete request
+		if self.head == None:
+			return
+		else
+			# start at head of list, loop until we're at the end
+			crnt = head
+			while crnt != None:
+				
+				# check if object the one requested for delete
+				if crnt is obj:
+				
+					# only one object in the LL
+					if head is tail
+						head = None
+						tail = None
+						crnt = None
+					# deleting head, LL has multiple object already
+					elif head is crnt:
+						head.next.prev = None
+						head = head.next
+						crnt = None
+					# deleting anywhere else in the LL
+					else
+						crnt.prev.next = crnt.next
+						# if deleting node is not already the tail
+						if crnt.next != None
+							crnt.next.prev = crnt.prev
+						else
+							tail = crnt.prev
+						crnt = None
+				# advance to next object in LL
+				else
+					crnt = crnt.next
+			
+			
+			
 			
