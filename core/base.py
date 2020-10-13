@@ -13,6 +13,9 @@ class Node(object):
 	def get_object(self, obj):
 		return self.obj
 		
+	def __str__(self):
+		return str(self.obj)
+		
 		
 
 class Universe(object):
@@ -26,7 +29,16 @@ class Universe(object):
 		self.cnt = 0
 		
 	def __str__(self):
-		return "Universe has " + str(self.cnt) + " objects"
+		return "Universe (" + str(id(self)) + ") has " + str(self.cnt) + " objects, " + "head=" + str(id(self.head)) + ", tail=" + str(id(self.tail)) 
+		
+	def list_objects(self):
+		s = ""
+		crnt = self.head
+		while crnt != None:
+			s = s + str(crnt) + "\n"
+			crnt = crnt.next
+		return s
+		
 		
 		
 	# methods for maintaining a linked-list of Nodes to track all entities in the universe
@@ -34,13 +46,18 @@ class Universe(object):
 		
 		# first Node in the LL
 		if self.head == None:
-			self.head = Node(obj)
-			self.tail = self.head
-
+			n = Node(obj)
+			self.head = n
+		elif self.cnt == 1:
+			n = Node(obj, None, self.head)
+			self.head.next = n
+			self.tail = n
 		# not first node, add to the end of the list
 		else:
-			newNode = Node(obj, None, self.tail)
-			self.tail.next = newNode
+			n = Node(obj, None, self.tail)
+			self.tail.next = n
+			self.tail = n
+			
 		self.cnt += 1
 		
 	def delete_obj(self, obj):
@@ -57,7 +74,7 @@ class Universe(object):
 				if crnt.obj is obj:
 				
 					# only one object in the LL
-					if self.head is tail:
+					if self.head is self.tail:
 						self.head = None
 						self.tail = None
 						crnt = None
