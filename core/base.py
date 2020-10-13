@@ -17,10 +17,10 @@ class Node(object):
 
 class Universe(object):
 
-	def __init__(self, w, h, d=0):
-		self.w = w
-		self.h = h
-		self.d = d
+	def __init__(self, x, y, z=0):
+		self.x = x
+		self.y = y
+		self.z = z
 		self.head = None
 		self.tail = None
 		self.cnt = 0
