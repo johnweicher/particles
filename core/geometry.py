@@ -2,7 +2,7 @@
 # Simple vector class
 class Vector(object):
 
-	def __init__(self, x, y, mag=0:
+	def __init__(self, x, y, mag=0):
 		self.x = x
 		self.y = y
 		
@@ -42,4 +42,5 @@ class MassPoint(Point):
 		super().__init__(x, y)
 		self.m = m
 		
-	
+
+# Universe needs an append and remove QUEUE list, so other entities like particles can request of the Universe to remove themselves and add newly joined particles.	
