@@ -1,3 +1,4 @@
+from	core.geometry import Point
 
 # Node object for implementing a linked list
 class Node(object):
@@ -20,16 +21,43 @@ class Node(object):
 
 class Universe(object):
 
-	def __init__(self, x, y, z=0):
+	def __init__(self, x, y, z, w, h):
 		self.x = x
 		self.y = y
 		self.z = z
+		self.w = w
+		self.h = h
 		self.head = None
 		self.tail = None
 		self.cnt = 0
 		
 	def __str__(self):
 		return "Universe (" + str(id(self)) + ") has " + str(self.cnt) + " objects, " + "head=" + str(id(self.head)) + ", tail=" + str(id(self.tail)) 
+
+	
+	def get_draw_coords(self, p=Point(0,0)):
+		# quick check for div by zero potential and just return point if so
+		if self.x == 0 or self.y == 0:
+			return p
+		else:
+			dX = self.w * ( (p.x - ((self.x/2)*-1)) / self.x )
+			dY = self.h * ( (p.y - ((self.y/2)*-1)) / self.y )
+			return Point(round(dX), round(dY))
+			
+	def get_draw_coord_x(self, x):
+		# quick check for div by zero potential and just return coord if so
+		if self.x == 0: 
+			return x
+		else:
+			return round(self.w * ( (x - ((self.x/2)*-1)) / self.x ))
+
+	def get_draw_coord_y(self, y):
+		# quick check for div by zero potential and just return coord if so
+		if self.y == 0:
+			return y
+		else:
+			return round(self.h * ( (y - ((self.y/2)*-1)) / self.y ))
+	
 		
 	def list_objects(self):
 		s = ""
@@ -138,13 +166,17 @@ class Universe(object):
 	def draw(self, win):
 		crnt = self.head
 		while crnt != None:
-			crnt.obj.draw(win)
+			crnt.obj.draw(win, self)
 			crnt = crnt.next
 			
 	def update(self):
 		crnt = self.head
 		while crnt != None:
-			crnt.obj.update()
+			crnt.obj.update(self)
 			crnt = crnt.next
 		
+
+
+
+
 		
