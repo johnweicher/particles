@@ -153,7 +153,11 @@ class ForceParticle(Particle):
 						newX = (self.p.x + p.x)/2
 						newY = (self.p.y + p.y)/2
 						newMass = (self.m + crnt.obj.m)
-						newRadius = (self.rad + crnt.obj.rad)
+						
+						area_self = math.pi * (self.rad * self.rad)
+						area_othr = math.pi * (crnt.obj.rad * crnt.obj.rad)
+						newRadius = math.sqrt( (area_self + area_othr)/math.pi )
+						
 						newV = Vector((self.v.x * self.v.mag) + (crnt.obj.v.x * crnt.obj.v.mag), (self.v.y * self.v.mag) + (crnt.obj.v.y * crnt.obj.v.mag))
 						newForce = (self.f + f)
 						newRange = (self.r + r)/2
@@ -193,8 +197,13 @@ class ForceParticle(Particle):
 		#pygame.draw.line(win, (255,0,0), (self.p.x, self.p.y), (round(self.p.x + (self.v.x*20)), round(self.p.y + (self.v.y*20))) )
 		dX = univ.get_draw_coord_x(self.p.x)
 		dY = univ.get_draw_coord_y(self.p.y)
-		pygame.gfxdraw.filled_circle(win, dX, dY, self.rad, (self.c.r,self.c.g,self.c.b))
-		pygame.gfxdraw.circle(win,dX, dY, round(self.r/10), (self.c.r,self.c.g,self.c.b))
+		
+		scaleX = (univ.x / univ.w)
+		scaleY = (univ.y / univ.h)
+		scale = min(scaleX, scaleY)
+		
+		pygame.gfxdraw.filled_circle(win, dX, dY, round(self.rad / scale), (self.c.r,self.c.g,self.c.b))
+		pygame.gfxdraw.circle(win,dX, dY, round(self.r / scale), (self.c.r,self.c.g,self.c.b))
 		pygame.draw.line(win, (self.c.r,self.c.g,self.c.b), (dX, dY), (round(dX + (self.v.x*20)), round(dY + (self.v.y*20))) )
 		
 		
