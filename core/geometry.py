@@ -76,18 +76,20 @@ class MassPoint(Point):
 
 class Particle(Point):
 
-	def __init__(self, p=Point(0,0), v=Vector(0,0)):
+	def __init__(self, p=Point(0,0), mass=0, radius=1, v=Vector(0,0)):
 		self.p = p
 		self.v = v
+		self.m = mass
+		self.rad = radius
 		
 	def __str__(self):
-		return "Particle( \n\t" + str(self.p) + ", \n\t" + str(self.v) + "\n)"
+		return "Particle( \n\t" + str(self.p) + ", \n\t" + "mass = " + str(self.m) + ", \n\t" + "radius = " + str(self.r) + ", \n\t" + str(self.v) + "\n)"
 	
 	
 class ForceParticle(Particle):
 	
-	def __init__(self, p=Point(0,0), v=Vector(0,0), force=0, range=0):
-		super().__init__(p, v)
+	def __init__(self, p=Point(0,0), mass=0, radius=1, v=Vector(0,0), force=0, range=0):
+		super().__init__(p, mass, radius, v)
 		self.f = force
 		self.r = range
 		
@@ -142,7 +144,7 @@ class ForceParticle(Particle):
 		#pygame.gfxdraw.filled_circle(win, self.p.x, self.p.y, 3, (255,0,0))
 		#pygame.gfxdraw.circle(win,self.p.x, self.p.y, self.r, (255,0,0))
 		#pygame.draw.line(win, (255,0,0), (self.p.x, self.p.y), (round(self.p.x + (self.v.x*20)), round(self.p.y + (self.v.y*20))) )
-		pygame.gfxdraw.filled_circle(win, univ.get_draw_coord_x(self.p.x), univ.get_draw_coord_y(self.p.y), 3, (255,0,0))
+		pygame.gfxdraw.filled_circle(win, univ.get_draw_coord_x(self.p.x), univ.get_draw_coord_y(self.p.y), self.rad, (255,0,0))
 		pygame.gfxdraw.circle(win,univ.get_draw_coord_x(self.p.x), univ.get_draw_coord_y(self.p.y), round(self.r/10), (255,0,0))
 		pygame.draw.line(win, (255,0,0), (univ.get_draw_coord_x(self.p.x), univ.get_draw_coord_y(self.p.y)), (round(univ.get_draw_coord_x(self.p.x) + (self.v.x*20)), round(univ.get_draw_coord_y(self.p.y) + (self.v.y*20))) )
 		
