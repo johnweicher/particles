@@ -8,15 +8,23 @@ pygame.init()
 winWidth = 1500
 winHeight = 1000
 
-univ = Universe(15000, 10000, 0, winWidth, winHeight)
+univ = Universe(3000, 2000, 0, winWidth, winHeight)
 print("Created Universe....")
 print(univ)
 
 # Set up a sample scene
-p = ForceParticle(Point(50, 50), Vector(1,5), 6, 1000)
-p2 = ForceParticle(Point(950, 950), Vector(-1,-2), 6, 1000)
+p = ForceParticle(Point(-550, 550), 1, 5, Vector(1,-2), 10, 2500, Color(255,0,0))
+p2 = ForceParticle(Point(550, -550), 1, 16, Vector(-1,2), 10, 2500, Color(0, 255, 0))
+p3 = ForceParticle(Point(-350, 650), 1, 5, Vector(1,-6), 6, 2500, Color(0, 0, 255))
+p4 = ForceParticle(Point(50, -950), 1, 6, Vector(-1,8), 6, 2500, Color(255, 255, 0))
+p5= ForceParticle(Point(-750, 0), 1, 5, Vector(1,-6), 6, 2500, Color(255, 0, 255))
+p6 = ForceParticle(Point(500, -650), 1, 6, Vector(-1,8), 6, 2500, Color(0, 255, 255))
 univ.append(p)
 univ.append(p2)
+univ.append(p3)
+univ.append(p4)
+univ.append(p5)
+univ.append(p6)
 print(univ.list_objects())
 
 
